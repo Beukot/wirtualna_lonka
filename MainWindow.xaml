@@ -7,21 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280" ResizeMode="NoResize">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0" Margin="15" Name="_MapGrid">
-
-        </Grid>
-
-        <Grid Grid.Column="1" Margin="15" Name="_ControlsArea">
-            <Button Height="40" Width="200" Click="Button_Click">
-                Generuj
-            </Button>
-        </Grid>
-
+        
     </Grid>
 </Window>
  

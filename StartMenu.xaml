@@ -1,0 +1,44 @@
+﻿<Window x:Class="wirtualna_lonka.StartMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wirtualna_lonka"
+        mc:Ignorable="d"
+        Title="startMenu" Height="400" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center">
+            Podaj wielkość!</TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBox
+                Name="_worldSize"
+                Margin="75 30"
+                TextChanged="_worldSize_TextChanged"
+            >
+
+            </TextBox>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Button
+            Name="_submit"
+            Margin="75 25"
+            IsEnabled="False"
+            Click="Button_Click">
+                Start!
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
