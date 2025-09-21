@@ -51,7 +51,6 @@ namespace wirtualna_lonka
             }
 
             CreateBorders();
-            CreateButtons();
         }
 
         void CreateBorders()
@@ -63,8 +62,12 @@ namespace wirtualna_lonka
                     Border cellBorder = new Border()
                     {
                         BorderBrush = Brushes.Black,
-                        BorderThickness = new Thickness(CellBorder)
+                        BorderThickness = new Thickness(CellBorder),
+                        Background = Brushes.Transparent
                     };
+
+                    cellBorder.MouseLeftButtonDown += cellClicked;
+
 
                     Grid.SetColumn(cellBorder, i);
                     Grid.SetRow(cellBorder, j);
@@ -73,36 +76,30 @@ namespace wirtualna_lonka
             }
         }
 
-        void CreateButtons()
+        void cellClicked(object sender, EventArgs e)
         {
-            for (int i = 0; i < MapSize; i++)
+            int clickedColumn = 0;
+            int clickedRow = 0;
+
+            if (sender is Border clicked)
             {
-                for (int j = 0; j < MapSize; j++)
-                {
-                    Button button = new Button()
-                    {
-
-                    };
-
-                    Grid.SetColumn(button, i);
-                    Grid.SetRow(button, j);
-                    _MapGrid.Children.Add(button);
-                }
+                clickedColumn = Grid.GetColumn(clicked);
+                clickedRow = Grid.GetRow(clicked);
             }
+            
+            GeneratePicture(clickedRow, clickedColumn);
         }
 
-        void GeneratePicture(int size)
+        void GeneratePicture(int row, int col)
         {
             Grid MapGrid = _MapGrid;
-            MapGrid.Children.Clear();
-            CreateBorders();
+            //MapGrid.Children.Clear();
+            //CreateBorders();
 
             Random rng = new Random();
 
-            int row = rng.Next(0, size);
-            int col = rng.Next(0, size);
-            int ImageIndex = rng.Next(1, 3);
-            int cellSize = ((int)((this.Width - 30) / 2 / size));
+            int ImageIndex = rng.Next(1, 4);
+            int cellSize = ((int)((this.Width - 30) / 2 / MapSize));
 
             Image img = new Image();
 
@@ -134,7 +131,7 @@ namespace wirtualna_lonka
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            GeneratePicture(MapSize);
+            //GeneratePicture(MapSize);
         }
     }
 
