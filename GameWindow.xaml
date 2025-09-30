@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wirtualna_lonka"
         mc:Ignorable="d"
-            Title="MainWindow" Height="720" Width="1280" ResizeMode="NoResize">
+        Title="Wirualna łonka" Height="720" Width="1280" ResizeMode="NoResize"
+        UseLayoutRounding="True"
+        RenderOptions.BitmapScalingMode="NearestNeighbor">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

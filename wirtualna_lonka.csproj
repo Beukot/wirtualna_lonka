@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="classes\Animal.cs" />
+    <Compile Include="classes\Organism.cs" />
+    <Compile Include="classes\Plant.cs" />
+    <Compile Include="classes\Position.cs" />
+    <Compile Include="classes\World.cs" />
     <Compile Include="StartMenu.xaml.cs">
       <DependentUpon>StartMenu.xaml</DependentUpon>
     </Compile>
@@ -112,6 +117,15 @@
     <Resource Include="images\image1.png" />
     <Resource Include="images\image2.png" />
     <Resource Include="images\image3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\dirt.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="classes\animals\" />
+    <Folder Include="classes\plants\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

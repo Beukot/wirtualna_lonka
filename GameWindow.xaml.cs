@@ -50,6 +50,23 @@ namespace wirtualna_lonka
                 });
             }
 
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    Image img = new Image()
+                    {
+                        Source = new BitmapImage(new Uri("pack://application:,,,/images/dirt.png")),
+                        Stretch = Stretch.Fill
+                    };
+
+                    Grid.SetColumn(img, i);
+                    Grid.SetRow(img, j);
+
+                    _MapGrid.Children.Add(img);
+                }
+            }
+
             CreateBorders();
         }
 
