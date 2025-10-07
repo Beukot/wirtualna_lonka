@@ -19,9 +19,80 @@
         </Grid>
 
         <Grid Grid.Column="1" Margin="15" Name="_ControlsArea">
-            <Button Height="40" Width="200" Click="Button_Click">
-                Generuj
-            </Button>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="8*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="6*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0">ID</Label>
+                <Label Grid.Column="1">Nazwa</Label>
+                <Label Grid.Column="2">Pozycja</Label>
+            </Grid>
+
+            <Border 
+                Margin="5"
+                Grid.Row="1"
+                BorderBrush="Black"
+                BorderThickness="2">
+                <ListBox Name="OrganismsList">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="organism:Organism">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="6*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{Binding id}"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding name}"></TextBlock>
+                                <TextBlock Grid.Column="2" Text="{Binding Position}"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+
+            <Border 
+                Margin="5"
+                Grid.Row="2"
+                BorderBrush="Black"
+                BorderThickness="2">
+
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Margin="5">Następna tura</Button>
+                    <Button Grid.Column="1" Margin="5">Następne zwierzę</Button>
+                    <Button Grid.Column="2" Margin="5">Usuń</Button>
+                    <Button Grid.Column="3" Margin="5">Zapisz</Button>
+                    <Button Grid.Column="4" Margin="5">Wczytaj</Button>
+                    <Button Grid.Column="5" Margin="5">Pokaż narratora</Button>
+                </Grid>
+            </Border>
+
+
+            <GroupBox Grid.Row="3" Header="Wybrany">
+                <Grid>
+
+                </Grid>
+            </GroupBox>
         </Grid>
 
     </Grid>

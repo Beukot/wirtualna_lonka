@@ -6,26 +6,20 @@ using System.Threading.Tasks;
 
 namespace wirtualna_lonka.classes
 {
-    struct Position
+    public struct Position
     {
-        private int x;
-        private int y;
+        public int X { get; set; }
+        public int Y { get; set; }
 
         public Position(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            X = x;
+            Y = y;
         }
 
-        public void SetPos(int x, int y)
+        public bool Equals(Position other)
         {
-            this.x = x;
-            this.y = y;
-        }
-
-        public Position GetPos()
-        {
-            return this;
+            return X == other.X && Y == other.Y;
         }
     }
 }

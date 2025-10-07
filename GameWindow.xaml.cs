@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using wirtualna_lonka.classes;
+using wirtualna_lonka.classes.animals;
 
 namespace wirtualna_lonka
 {
@@ -20,17 +22,22 @@ namespace wirtualna_lonka
     /// </summary>
     public partial class GameWindow : Window
     {
-        int MapSize;
+        World world;
         int CellBorder = 1;
 
         public GameWindow(int size)
         {
-            MapSize = size;
+            world = World.GetWorld(size);
             InitializeComponent();
-            CreateGride(MapSize);
+            CreateGrid(world.WorldSize);
+
+            Sheep sheep = new Sheep();
+            sheep.Position = world.RandomPosition();
+            world.AddOrganism(sheep);
+            RenderOrganisms();
         }
 
-        void CreateGride(int size)
+        void CreateGrid(int size)
         {
             Grid MapGrid = _MapGrid;
             MapGrid.RowDefinitions.Clear();
@@ -54,37 +61,18 @@ namespace wirtualna_lonka
             {
                 for (int j = 0; j < size; j++)
                 {
-                    Image img = new Image()
-                    {
-                        Source = new BitmapImage(new Uri("pack://application:,,,/images/dirt.png")),
-                        Stretch = Stretch.Fill
-                    };
-
-                    Grid.SetColumn(img, i);
-                    Grid.SetRow(img, j);
-
-                    _MapGrid.Children.Add(img);
-                }
-            }
-
-            CreateBorders();
-        }
-
-        void CreateBorders()
-        {
-            for (int i = 0; i < MapSize; i++)
-            {
-                for (int j = 0; j < MapSize; j++)
-                {
                     Border cellBorder = new Border()
                     {
                         BorderBrush = Brushes.Black,
                         BorderThickness = new Thickness(CellBorder),
-                        Background = Brushes.Transparent
+                        Background = new ImageBrush()
+                        {
+                            ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/dirt.png")),
+                            Stretch = Stretch.Fill
+                        }
                     };
 
                     cellBorder.MouseLeftButtonDown += cellClicked;
-
 
                     Grid.SetColumn(cellBorder, i);
                     Grid.SetRow(cellBorder, j);
@@ -103,52 +91,33 @@ namespace wirtualna_lonka
                 clickedColumn = Grid.GetColumn(clicked);
                 clickedRow = Grid.GetRow(clicked);
             }
-            
-            GeneratePicture(clickedRow, clickedColumn);
         }
 
-        void GeneratePicture(int row, int col)
+        void RenderOrganisms()
         {
-            Grid MapGrid = _MapGrid;
-            //MapGrid.Children.Clear();
-            //CreateBorders();
-
-            Random rng = new Random();
-
-            int ImageIndex = rng.Next(1, 4);
-            int cellSize = ((int)((this.Width - 30) / 2 / MapSize));
-
-            Image img = new Image();
-
-            img.Source = new BitmapImage(new Uri(GetImageSource(ImageIndex)));
-            img.Width = cellSize;
-            img.Height = cellSize;
-
-            Grid.SetRow(img, row);
-            Grid.SetColumn(img, col);
-            _MapGrid.Children.Add(img);
-
-            Debug.WriteLine(Grid.GetColumn(img));
-        }
-
-        string GetImageSource(int index)
-        {
-            switch (index)
+            foreach (Organism org in world.GetOrganisms())
             {
-                case 1:
-                    return "pack://application:,,,/images/image1.png";
-                case 2:
-                    return "pack://application:,,,/images/image2.png";
-                case 3:
-                    return "pack://application:,,,/images/image3.png";
+                Image img = new Image()
+                {
+                    Source = org.image,
+                    Stretch = Stretch.Fill
+                };
+
+                Grid.SetColumn(img, org.Position.X);
+                Grid.SetRow(img, org.Position.Y);
+                _MapGrid.Children.Add(img);
             }
 
-            return "pack://application:,,,/images/image1.png";
+            RefreshOrganismsList();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        void RefreshOrganismsList()
         {
-            //GeneratePicture(MapSize);
+            OrganismsList.Items.Clear();
+            foreach (var organism in world.GetOrganisms())
+            {
+                OrganismsList.Items.Add(organism);
+            }
         }
     }
 

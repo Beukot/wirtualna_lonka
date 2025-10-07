@@ -8,9 +8,25 @@ namespace wirtualna_lonka.classes
 {
     internal class Animal : Organism
     {
-        bool EatsMeat;
-        int Speed;
+        public Animal(double health, double initiative, double strenght, double agility, double multiplyChance, string imageSource) : base(health, initiative, strenght, agility, multiplyChance, imageSource)
+        {
+        }
 
-        void Move() { }
+        public override void Action()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Multiply()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Organism Mutation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Move() { }
     }
 }
