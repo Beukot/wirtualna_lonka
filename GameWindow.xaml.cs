@@ -39,6 +39,7 @@ namespace wirtualna_lonka
             
             world.SpawnInititalOrganisms();
             RenderOrganisms();
+            RefreshOrganismsList();
         }
 
         void CreateGrid(int size)
@@ -76,7 +77,7 @@ namespace wirtualna_lonka
                         }
                     };
 
-                    cellBorder.MouseLeftButtonDown += cellClicked;
+                    cellBorder.MouseLeftButtonDown += CellClicked;
 
                     Grid.SetColumn(cellBorder, i);
                     Grid.SetRow(cellBorder, j);
@@ -85,7 +86,7 @@ namespace wirtualna_lonka
             }
         }
 
-        void cellClicked(object sender, EventArgs e)
+        void CellClicked(object sender, EventArgs e)
         {
             int clickedColumn = 0;
             int clickedRow = 0;
@@ -99,8 +100,26 @@ namespace wirtualna_lonka
 
         void RenderOrganisms()
         {
+            foreach (UIElement element in _MapGrid.Children.OfType<Image>().ToList())
+            {
+                _MapGrid.Children.Remove(element);
+            }
+
             foreach (Organism org in world.GetOrganisms())
             {
+                if (SelectedOrganism != null && org.id == SelectedOrganism.id)
+                {
+                    Image selectedBackground = new Image()
+                    {
+                        Source = new BitmapImage(new Uri("images/selected.png", UriKind.Relative)),
+                        Stretch = Stretch.Fill
+                    };
+
+                    Grid.SetColumn(selectedBackground, org.Position.X);
+                    Grid.SetRow(selectedBackground, org.Position.Y);
+                    _MapGrid.Children.Add(selectedBackground);
+                }
+
                 Image img = new Image()
                 {
                     Source = org.image,
@@ -111,8 +130,6 @@ namespace wirtualna_lonka
                 Grid.SetRow(img, org.Position.Y);
                 _MapGrid.Children.Add(img);
             }
-
-            RefreshOrganismsList();
         }
 
         void RefreshOrganismsList()
@@ -130,6 +147,8 @@ namespace wirtualna_lonka
             {
                 SelectedOrganism = selected;
                 _SelectedOrganism.Content = SelectedOrganism;
+                //RefreshOrganismsList();
+                RenderOrganisms();
             }
         }
     }
