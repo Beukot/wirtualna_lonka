@@ -8,8 +8,9 @@ namespace wirtualna_lonka.classes.animals
 {
     internal class Sheep : Animal
     {
-        public Sheep() : base(health: 80, initiative: 4, strenght: 4, agility: 5, multiplyChance: 0.5, imageSource: "images/sheep.png")
+        public Sheep() : base(health: 80, initiative: 4, strength: 4, agility: 5, multiplyChance: 0.5, imageSource: "images/sheep.png")
         {
+            name = "Sheep";
         }
 
         public override void Action()

@@ -8,7 +8,7 @@ namespace wirtualna_lonka.classes
 {
     internal class Animal : Organism
     {
-        public Animal(double health, double initiative, double strenght, double agility, double multiplyChance, string imageSource) : base(health, initiative, strenght, agility, multiplyChance, imageSource)
+        public Animal(double health, double initiative, double strength, double agility, double multiplyChance, string imageSource) : base(health, initiative, strength, agility, multiplyChance, imageSource)
         {
         }
 

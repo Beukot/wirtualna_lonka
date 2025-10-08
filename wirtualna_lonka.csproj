@@ -60,6 +60,7 @@
     <Compile Include="classes\animals\Sheep.cs" />
     <Compile Include="classes\Organism.cs" />
     <Compile Include="classes\Plant.cs" />
+    <Compile Include="classes\plants\Grass.cs" />
     <Compile Include="classes\Position.cs" />
     <Compile Include="classes\World.cs" />
     <Compile Include="StartMenu.xaml.cs">
@@ -126,7 +127,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="classes\plants\" />
+    <Resource Include="images\grass.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\sheep.png" />

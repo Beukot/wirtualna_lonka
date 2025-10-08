@@ -9,27 +9,27 @@ namespace wirtualna_lonka.classes
 {
     public abstract class Organism
     {
-        protected string name { get; set; }
+        public string name { get; set; }
         public Position Position { get; set; }
-        protected int age { get; set; }
-        protected double health { get; set; }
-        protected double initiative { get; set; }
-        protected double strenght { get; set; }
-        protected double agility { get; set; }
-        int id { get; set; }
-        protected double multiplyChance { get; set; }
+        public int age { get; set; }
+        public double health { get; set; }
+        public double initiative { get; set; }
+        public double strength { get; set; }
+        public double agility { get; set; }
+        public int id { get; set; }
+        public double multiplyChance { get; set; }
         static int id_counter { get; set; }
         public BitmapImage image { get; set; }
-        protected int spawnRate { get; set; }
+        public int spawnRate { get; set; }
         protected static Random r = new Random();
 
-        public Organism(double health, double initiative, double strenght, double agility, double multiplyChance, string imageSource)
+        public Organism(double health, double initiative, double strength, double agility, double multiplyChance, string imageSource)
         {
             this.image = new BitmapImage(new Uri(imageSource, UriKind.Relative));
             this.id = id_counter++;
             this.health = health;
             this.initiative = initiative;
-            this.strenght = strenght;
+            this.strength = strength;
             this.agility = agility;
             this.multiplyChance = multiplyChance;
         }

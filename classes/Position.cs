@@ -21,5 +21,10 @@ namespace wirtualna_lonka.classes
         {
             return X == other.X && Y == other.Y;
         }
+
+        public override string ToString()
+        {
+            return X.ToString() + ", " + Y.ToString();
+        }
     }
 }

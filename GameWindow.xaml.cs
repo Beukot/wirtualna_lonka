@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,26 +16,29 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using wirtualna_lonka.classes;
 using wirtualna_lonka.classes.animals;
-
+using wirtualna_lonka.classes.plants;
+ 
 namespace wirtualna_lonka
 {
     /// <summary>
     /// Interaction logic for GameWindow.xaml
     /// </summary>
-    public partial class GameWindow : Window
+    public partial class GameWindow : Window, INotifyPropertyChanged
     {
         World world;
         int CellBorder = 1;
+        private Organism _selectedOrganism;
+        public Organism SelectedOrganism { get => _selectedOrganism; set { if (_selectedOrganism != value) { _selectedOrganism = value; OnPropertyChanged(); } } }
 
         public GameWindow(int size)
         {
             world = World.GetWorld(size);
+            DataContext = this;
             InitializeComponent();
             CreateGrid(world.WorldSize);
 
-            Sheep sheep = new Sheep();
-            sheep.Position = world.RandomPosition();
-            world.AddOrganism(sheep);
+            
+            world.SpawnInititalOrganisms();
             RenderOrganisms();
         }
 
@@ -113,12 +118,23 @@ namespace wirtualna_lonka
 
         void RefreshOrganismsList()
         {
-            OrganismsList.Items.Clear();
+            _OrganismsList.Items.Clear();
             foreach (var organism in world.GetOrganisms())
             {
-                OrganismsList.Items.Add(organism);
+                _OrganismsList.Items.Add(organism);
             }
         }
+
+        void OrganismsListSelection(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ListBox _OrganismsList && _OrganismsList.SelectedItem is Organism selected)
+            {
+                SelectedOrganism = selected;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged; 
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
 }

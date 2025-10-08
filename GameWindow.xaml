@@ -33,9 +33,9 @@
                     <ColumnDefinition Width="6*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0">ID</Label>
-                <Label Grid.Column="1">Nazwa</Label>
-                <Label Grid.Column="2">Pozycja</Label>
+                <TextBlock Grid.Column="0" VerticalAlignment="Center">ID</TextBlock>
+                <TextBlock Grid.Column="1" VerticalAlignment="Center">Nazwa</TextBlock>
+                <TextBlock Grid.Column="2" VerticalAlignment="Center">Pozycja</TextBlock>
             </Grid>
 
             <Border 
@@ -43,9 +43,9 @@
                 Grid.Row="1"
                 BorderBrush="Black"
                 BorderThickness="2">
-                <ListBox Name="OrganismsList">
+                <ListBox Name="_OrganismsList" HorizontalContentAlignment="Stretch" SelectionChanged="OrganismsListSelection">
                     <ListBox.ItemTemplate>
-                        <DataTemplate DataType="organism:Organism">
+                        <DataTemplate DataType="Organism">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -90,7 +90,73 @@
 
             <GroupBox Grid.Row="3" Header="Wybrany">
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
 
+                    <GroupBox Grid.Column="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" VerticalAlignment="Center">ID</TextBlock>
+                                <TextBlock Grid.Row="1" VerticalAlignment="Center">Nazwa</TextBlock>
+                                <TextBlock Grid.Row="2" VerticalAlignment="Center">Wiek</TextBlock>
+                                <TextBlock Grid.Row="3" VerticalAlignment="Center">Zdrowie</TextBlock>
+                                <TextBlock Grid.Row="4" VerticalAlignment="Center">Siła</TextBlock>
+                                <TextBlock Grid.Row="5" VerticalAlignment="Center">Inicjatywa</TextBlock>
+                                <TextBlock Grid.Row="6" VerticalAlignment="Center">Zwinność</TextBlock>
+                                <TextBlock Grid.Row="7" VerticalAlignment="Center">Pozycja</TextBlock>
+                                <TextBlock Grid.Row="8" VerticalAlignment="Center">Szansa na rozmnażanie</TextBlock>
+                            </Grid>
+
+                            <GroupBox Name="_SelectedOrganism" BorderThickness="0" Grid.Column="1" Content="{Binding SelectedOrganism}">
+                                <GroupBox.ContentTemplate>
+                                    <DataTemplate DataType="Organism">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Text="{Binding id}" Grid.Row="0" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="{Binding name}" Grid.Row="1" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="{Binding age}" Grid.Row="2" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="{Binding health}" Grid.Row="3" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="{Binding strength}" Grid.Row="4" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="{Binding initiative}" Grid.Row="5" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="{Binding agility}" Grid.Row="6" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="{Binding Position}" Grid.Row="7" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="{Binding multiplyChance}" Grid.Row="8" VerticalAlignment="Center"></TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GroupBox.ContentTemplate>
+                            </GroupBox>
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </GroupBox>
         </Grid>

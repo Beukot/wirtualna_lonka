@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using wirtualna_lonka.classes.animals;
+using wirtualna_lonka.classes.plants;
 
 namespace wirtualna_lonka.classes
 {
@@ -12,11 +13,11 @@ namespace wirtualna_lonka.classes
         private static World _instance;
         private List<Organism> organisms = new List<Organism>();
 
-        private World() 
+        private World()
         {
         }
 
-        public int WorldSize { get; set;}
+        public int WorldSize { get; set; }
 
         Random rng = new Random();
 
@@ -51,6 +52,51 @@ namespace wirtualna_lonka.classes
         public Position RandomPosition()
         {
             return new Position(rng.Next(0, WorldSize), rng.Next(0, WorldSize));
+        }
+
+        public void SpawnInititalOrganisms()
+        {
+            for (int i = 0; i < WorldSize; i++)
+            {
+                Organism organism = null;
+
+                switch (rng.Next(0, 2))
+                {
+                    case 0:
+                        organism = new Sheep();
+                        break;
+                    case 1:
+                        organism = new Grass();
+                        break;
+                }
+
+                List<Organism> orgs = GetOrganisms();
+                bool legalPos = false;
+                Position pos = RandomPosition();
+
+                while (legalPos == false)
+                {
+                    pos = RandomPosition();
+                    bool illegalPos = false;
+
+                    foreach (Organism org in orgs)
+                    {
+                        if (org.Compare(pos))
+                        {
+                            illegalPos = true;
+                        }
+                    }
+
+                    if (!illegalPos)
+                    {
+                        legalPos = true;
+                    }
+                }
+
+                organism.Position = pos;
+                this.AddOrganism(organism);
+
+            }
         }
     }
 }
