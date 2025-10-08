@@ -23,12 +23,11 @@ namespace wirtualna_lonka
     /// <summary>
     /// Interaction logic for GameWindow.xaml
     /// </summary>
-    public partial class GameWindow : Window, INotifyPropertyChanged
+    public partial class GameWindow : Window
     {
         World world;
         int CellBorder = 1;
-        private Organism _selectedOrganism;
-        public Organism SelectedOrganism { get => _selectedOrganism; set { if (_selectedOrganism != value) { _selectedOrganism = value; OnPropertyChanged(); } } }
+        public Organism SelectedOrganism;
 
         public GameWindow(int size)
         {
@@ -130,11 +129,8 @@ namespace wirtualna_lonka
             if (sender is ListBox _OrganismsList && _OrganismsList.SelectedItem is Organism selected)
             {
                 SelectedOrganism = selected;
+                _SelectedOrganism.Content = SelectedOrganism;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged; 
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-
 }
