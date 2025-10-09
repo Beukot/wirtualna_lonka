@@ -105,19 +105,31 @@ namespace wirtualna_lonka
                 _MapGrid.Children.Remove(element);
             }
 
+            // Remove highlight
+            foreach (UIElement element in _MapGrid.Children.OfType<Border>().Where(b => b.Name == "HighlightedCell").ToList())
+            {
+                _MapGrid.Children.Remove(element);
+            }
+
             foreach (Organism org in world.GetOrganisms())
             {
                 if (SelectedOrganism != null && org.id == SelectedOrganism.id)
                 {
-                    Image selectedBackground = new Image()
+                    Border highlightedCell = new Border()
                     {
-                        Source = new BitmapImage(new Uri("images/selected.png", UriKind.Relative)),
-                        Stretch = Stretch.Fill
+                        Name = "HighlightedCell",
+                        BorderBrush = Brushes.Black,
+                        BorderThickness = new Thickness(CellBorder),
+                        Background = new ImageBrush()
+                        {
+                            ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/selected.png")),
+                            Stretch = Stretch.Fill
+                        }
                     };
 
-                    Grid.SetColumn(selectedBackground, org.Position.X);
-                    Grid.SetRow(selectedBackground, org.Position.Y);
-                    _MapGrid.Children.Add(selectedBackground);
+                    Grid.SetColumn(highlightedCell, org.Position.X);
+                    Grid.SetRow(highlightedCell, org.Position.Y);
+                    _MapGrid.Children.Add(highlightedCell);
                 }
 
                 Image img = new Image()
