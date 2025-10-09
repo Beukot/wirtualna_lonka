@@ -159,7 +159,21 @@ namespace wirtualna_lonka
             {
                 SelectedOrganism = selected;
                 _SelectedOrganism.Content = SelectedOrganism;
+                _SelectedOrganismImage.Source = SelectedOrganism.image;
                 //RefreshOrganismsList();
+                RenderOrganisms();
+            }
+        }
+
+        private void Button_Remove_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedOrganism != null)
+            {
+                world.RemoveOrganism(SelectedOrganism);
+                SelectedOrganism = null;
+                _SelectedOrganism.Content = "None";
+                _SelectedOrganismImage.Source = null;
+                RefreshOrganismsList();
                 RenderOrganisms();
             }
         }

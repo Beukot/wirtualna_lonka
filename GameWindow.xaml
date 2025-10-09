@@ -78,12 +78,24 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Margin="5">Następna tura</Button>
-                    <Button Grid.Column="1" Margin="5">Następne zwierzę</Button>
-                    <Button Grid.Column="2" Margin="5">Usuń</Button>
-                    <Button Grid.Column="3" Margin="5">Zapisz</Button>
-                    <Button Grid.Column="4" Margin="5">Wczytaj</Button>
-                    <Button Grid.Column="5" Margin="5">Pokaż narratora</Button>
+                    <Button Grid.Column="0" Margin="5">
+                        <TextBlock Text="Następna tura" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+                    <Button Grid.Column="1" Margin="5">
+                        <TextBlock Text="Następne zwierzę" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+                    <Button Grid.Column="2" Margin="5" Click="Button_Remove_Click">
+                        <TextBlock Text="Usuń" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+                    <Button Grid.Column="3" Margin="5">
+                        <TextBlock Text="Zapisz" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+                    <Button Grid.Column="4" Margin="5">
+                        <TextBlock Text="Wczytaj" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+                    <Button Grid.Column="5" Margin="5">
+                        <TextBlock Text="Pokaż narratora" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
                 </Grid>
             </Border>
 
@@ -95,7 +107,7 @@
                         <ColumnDefinition Width="2*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <GroupBox Grid.Column="0">
+                    <GroupBox Grid.Column="0" Margin="15">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -156,6 +168,10 @@
                                 </GroupBox.ContentTemplate>
                             </GroupBox>
                         </Grid>
+                    </GroupBox>
+
+                    <GroupBox Grid.Column="1" Margin="15">
+                        <Image Name="_SelectedOrganismImage" Stretch="Uniform" Margin="15"/>
                     </GroupBox>
                 </Grid>
             </GroupBox>
