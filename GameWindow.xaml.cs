@@ -171,7 +171,7 @@ namespace wirtualna_lonka
             {
                 world.RemoveOrganism(SelectedOrganism);
                 SelectedOrganism = null;
-                _SelectedOrganism.Content = "None";
+                _SelectedOrganism.Content = null;
                 _SelectedOrganismImage.Source = null;
                 RefreshOrganismsList();
                 RenderOrganisms();

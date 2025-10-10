@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wirtualna_lonka"
         mc:Ignorable="d"
-        Title="Wirualna łonka" Height="720" Width="1280" ResizeMode="NoResize"
+        Title="Wirualna łonka" Height="900" Width="1600" ResizeMode="NoResize"
         UseLayoutRounding="True"
         RenderOptions.BitmapScalingMode="NearestNeighbor">
     <Grid>
@@ -14,9 +14,13 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Margin="15" Name="_MapGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-        </Grid>
+        <Border BorderBrush="Black" BorderThickness="1" Background="Transparent" Margin="15">
+            <Grid Grid.Column="0" Name="_MapGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            </Grid>
+        </Border>
+
 
         <Grid Grid.Column="1" Margin="15" Name="_ControlsArea">
             <Grid.RowDefinitions>
