@@ -79,9 +79,7 @@ namespace wirtualna_lonka
 
                     cellBorder.MouseLeftButtonDown += CellClicked;
 
-                    Grid.SetColumn(cellBorder, i);
-                    Grid.SetRow(cellBorder, j);
-                    _MapGrid.Children.Add(cellBorder);
+                    AddToGrid(cellBorder, i, j);
                 }
             }
         }
@@ -97,6 +95,26 @@ namespace wirtualna_lonka
                 clickedRow = Grid.GetRow(clicked);
             }
         }
+
+        void OrganismsListSelection(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ListBox _OrganismsList && _OrganismsList.SelectedItem is Organism selected)
+            {
+                SetSelectedOrganism(selected);
+            }
+        }
+
+        private void Button_Remove_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedOrganism != null)
+            {
+                world.RemoveOrganism(SelectedOrganism);
+                SetSelectedOrganism(null);
+                RefreshOrganismsList();
+            }
+        }
+
+        #region Rendering related functions
 
         void RenderOrganisms()
         {
@@ -127,9 +145,7 @@ namespace wirtualna_lonka
                         }
                     };
 
-                    Grid.SetColumn(highlightedCell, org.Position.X);
-                    Grid.SetRow(highlightedCell, org.Position.Y);
-                    _MapGrid.Children.Add(highlightedCell);
+                    AddToGrid(highlightedCell, org.Position.X, org.Position.Y);
                 }
 
                 Image img = new Image()
@@ -138,9 +154,12 @@ namespace wirtualna_lonka
                     Stretch = Stretch.Fill
                 };
 
-                Grid.SetColumn(img, org.Position.X);
-                Grid.SetRow(img, org.Position.Y);
-                _MapGrid.Children.Add(img);
+                img.MouseLeftButtonDown += (s, e) =>
+                {
+                    SetSelectedOrganism(org);
+                };
+
+                AddToGrid(img, org.Position.X, org.Position.Y);
             }
         }
 
@@ -153,29 +172,26 @@ namespace wirtualna_lonka
             }
         }
 
-        void OrganismsListSelection(object sender, SelectionChangedEventArgs e)
+        #endregion
+
+
+        #region Multiple use code functions
+        void AddToGrid(UIElement element, int X, int Y)
         {
-            if (sender is ListBox _OrganismsList && _OrganismsList.SelectedItem is Organism selected)
-            {
-                SelectedOrganism = selected;
-                _SelectedOrganism.Content = SelectedOrganism;
-                _SelectedOrganismImage.Source = SelectedOrganism.image;
-                //RefreshOrganismsList();
-                RenderOrganisms();
-            }
+            Grid.SetColumn(element, X);
+            Grid.SetRow(element, Y);
+            _MapGrid.Children.Add(element);
         }
 
-        private void Button_Remove_Click(object sender, RoutedEventArgs e)
+        void SetSelectedOrganism(Organism org)
         {
-            if (SelectedOrganism != null)
-            {
-                world.RemoveOrganism(SelectedOrganism);
-                SelectedOrganism = null;
-                _SelectedOrganism.Content = null;
-                _SelectedOrganismImage.Source = null;
-                RefreshOrganismsList();
-                RenderOrganisms();
-            }
+            SelectedOrganism = org;
+            _SelectedOrganism.Content = SelectedOrganism;
+            _SelectedOrganismImage.Source = SelectedOrganism == null ? null : SelectedOrganism.image;
+            _OrganismsList.SelectedItem = SelectedOrganism;
+            RenderOrganisms();
         }
+
+        #endregion
     }
 }
