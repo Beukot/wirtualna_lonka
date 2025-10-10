@@ -66,19 +66,8 @@ namespace wirtualna_lonka
             {
                 for (int j = 0; j < size; j++)
                 {
-                    Border cellBorder = new Border()
-                    {
-                        BorderBrush = Brushes.Black,
-                        BorderThickness = new Thickness(CellBorder),
-                        Background = new ImageBrush()
-                        {
-                            ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/dirt.png")),
-                            Stretch = Stretch.Fill
-                        }
-                    };
-
+                    Border cellBorder = CreateOrganismBorder("GroundCell", "dirt.png");
                     cellBorder.MouseLeftButtonDown += CellClicked;
-
                     AddToGrid(cellBorder, i, j);
                 }
             }
@@ -133,18 +122,7 @@ namespace wirtualna_lonka
             {
                 if (SelectedOrganism != null && org.id == SelectedOrganism.id)
                 {
-                    Border highlightedCell = new Border()
-                    {
-                        Name = "HighlightedCell",
-                        BorderBrush = Brushes.Black,
-                        BorderThickness = new Thickness(CellBorder),
-                        Background = new ImageBrush()
-                        {
-                            ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/selected.png")),
-                            Stretch = Stretch.Fill
-                        }
-                    };
-
+                    Border highlightedCell = CreateOrganismBorder("HighlightedCell", "selected.png");
                     AddToGrid(highlightedCell, org.Position.X, org.Position.Y);
                 }
 
@@ -176,6 +154,22 @@ namespace wirtualna_lonka
 
 
         #region Multiple use code functions
+
+        Border CreateOrganismBorder(string Name, string Image)
+        {
+            return new Border()
+            {
+                Name = Name,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(CellBorder),
+                Background = new ImageBrush()
+                {
+                    ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{Image}")),
+                    Stretch = Stretch.Fill
+                }
+            };
+        }
+
         void AddToGrid(UIElement element, int X, int Y)
         {
             Grid.SetColumn(element, X);
