@@ -56,22 +56,11 @@ namespace wirtualna_lonka.classes
 
         public void SpawnInititalOrganisms()
         {
+            List<Type> OrganismTypes = new List<Type>() { typeof(Sheep), typeof(Grass), typeof(Milkweed) };
+
             for (int i = 0; i < WorldSize; i++)
             {
-                Organism organism = null;
-
-                switch (rng.Next(0, 3))
-                {
-                    case 0:
-                        organism = new Sheep();
-                        break;
-                    case 1:
-                        organism = new Grass();
-                        break;
-                    case 2:
-                        organism = new Milkweed();
-                        break;
-                }
+                Organism organism = (Organism)Activator.CreateInstance(OrganismTypes[rng.Next(0, OrganismTypes.Count)]);
 
                 List<Organism> orgs = GetOrganisms();
                 bool legalPos = false;
@@ -79,13 +68,14 @@ namespace wirtualna_lonka.classes
 
                 while (legalPos == false)
                 {
+                    SKIP_ITERATION:;
                     pos = RandomPosition();
 
                     foreach (Organism org in orgs)
                     {
                         if (org.Compare(pos))
                         {
-                            continue;
+                            goto SKIP_ITERATION;
                         }
                     }
 
