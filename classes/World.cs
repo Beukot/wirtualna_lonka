@@ -63,23 +63,17 @@ namespace wirtualna_lonka.classes
                 Organism organism = (Organism)Activator.CreateInstance(OrganismTypes[rng.Next(0, OrganismTypes.Count)]);
 
                 List<Organism> orgs = GetOrganisms();
-                bool legalPos = false;
-                Position pos = RandomPosition();
+                Position pos;
 
-                while (legalPos == false)
+                SKIP_ITERATION:;
+                pos = RandomPosition();
+
+                foreach (Organism org in orgs)
                 {
-                    SKIP_ITERATION:;
-                    pos = RandomPosition();
-
-                    foreach (Organism org in orgs)
+                    if (org.Compare(pos))
                     {
-                        if (org.Compare(pos))
-                        {
-                            goto SKIP_ITERATION;
-                        }
+                        goto SKIP_ITERATION;
                     }
-
-                    legalPos = true;
                 }
 
                 organism.Position = pos;
