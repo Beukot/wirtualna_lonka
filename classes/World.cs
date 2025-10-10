@@ -60,13 +60,16 @@ namespace wirtualna_lonka.classes
             {
                 Organism organism = null;
 
-                switch (rng.Next(0, 2))
+                switch (rng.Next(0, 3))
                 {
                     case 0:
                         organism = new Sheep();
                         break;
                     case 1:
                         organism = new Grass();
+                        break;
+                    case 2:
+                        organism = new Milkweed();
                         break;
                 }
 
@@ -77,25 +80,20 @@ namespace wirtualna_lonka.classes
                 while (legalPos == false)
                 {
                     pos = RandomPosition();
-                    bool illegalPos = false;
 
                     foreach (Organism org in orgs)
                     {
                         if (org.Compare(pos))
                         {
-                            illegalPos = true;
+                            continue;
                         }
                     }
 
-                    if (!illegalPos)
-                    {
-                        legalPos = true;
-                    }
+                    legalPos = true;
                 }
 
                 organism.Position = pos;
                 this.AddOrganism(organism);
-
             }
         }
     }

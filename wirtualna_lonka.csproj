@@ -61,6 +61,7 @@
     <Compile Include="classes\Organism.cs" />
     <Compile Include="classes\Plant.cs" />
     <Compile Include="classes\plants\Grass.cs" />
+    <Compile Include="classes\plants\Milkweed.cs" />
     <Compile Include="classes\Position.cs" />
     <Compile Include="classes\World.cs" />
     <Compile Include="StartMenu.xaml.cs">
@@ -134,6 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\selected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\milkweed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
